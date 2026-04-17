@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User; // Assurez-vous d'importer le modèle User
+
 
 class AdminUserController extends Controller
 {

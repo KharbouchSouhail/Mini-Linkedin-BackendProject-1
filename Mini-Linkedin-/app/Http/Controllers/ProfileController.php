@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Profil; // Assurez-vous d'importer le modèle Profil
 
 class ProfileController extends Controller
 {

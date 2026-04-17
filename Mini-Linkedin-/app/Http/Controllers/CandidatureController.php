@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Candidature;
+use App\Models\Offre;
+use App\Models\Profil;
+
 
 class CandidatureController extends Controller
 {

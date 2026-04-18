@@ -17,21 +17,11 @@ decoupling of application logic.
 - Composer
 - MySQL
 - Postman (for API testing)
-- **Laravel 10** — used for its powerful Artisan CLI that automatically generates
-  files (controllers, models, migrations, events, listeners, middleware and more)
-  with a single command, saving development time and enforcing a clean structure.
-
-## Tech Stack
-- **Laravel 10** — PHP Framework
-- **JWT Auth** — API Authentication (tymon/jwt-auth)
-- **MySQL** — Database
-- **Eloquent ORM** — Database interaction
-- **Laravel Events & Listeners** — Decoupled application logic
 
 ## Installation Steps
 
 1. **Clone the project**
-   git clone https://github.com/KharbouchSouhail/Mini-Linkedin-BackendProject-1
+   git clone https://github.com/your-repo/Mini-Linkedin.git
    cd Mini-Linkedin
 
 2. **Install dependencies**

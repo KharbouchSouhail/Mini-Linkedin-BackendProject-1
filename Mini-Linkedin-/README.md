@@ -24,28 +24,28 @@ decoupling of application logic.
    git clone [https://github.com/your-repo/Mini-Linkedin.git](https://github.com/KharbouchSouhail/Mini-Linkedin-BackendProject-1)
    cd Mini-Linkedin
 
-2. **Install dependencies**
+3. **Install dependencies**
    composer install
 
-3. **Create environment file**
+4. **Create environment file**
    cp .env.example .env
 
-4. **Configure your database**
+5. **Configure your database**
    Open .env and update:
    DB_DATABASE=your_database_name
    DB_USERNAME=your_username
    DB_PASSWORD=your_password
 
-5. **Generate Laravel key**
+6. **Generate Laravel key**
    php artisan key:generate
 
-6. **Generate JWT secret**
+7. **Generate JWT secret**
    php artisan jwt:secret
 
-7. **Run migrations and seeders**
+8. **Run migrations and seeders**
    php artisan migrate:fresh --seed
 
-8. **Start the server**
+9. **Start the server**
    php artisan serve
 
 ## Roles

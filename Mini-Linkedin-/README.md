@@ -1,69 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mini LinkedIn - Backend Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
+Mini LinkedIn is a backend REST API built with **Laravel 10**, designed to simulate
+a professional networking and job application platform. It allows candidates to 
+create profiles, browse job offers, and apply to them. Recruiters can post offers 
+and manage applications. Admins can manage users and moderate offers.
 
-## About Laravel
+Laravel 10 was chosen for this project because of its powerful built-in tools that 
+boost developer productivity — such as automatic file generation via Artisan commands 
+(controllers, models, migrations, events, listeners, and more), a clean routing system,
+JWT authentication support, and a robust event/listener architecture that allows clean 
+decoupling of application logic.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requirements
+- PHP >= 8.1
+- Composer
+- MySQL
+- Postman (for API testing)
+- **Laravel 10** — used for its powerful Artisan CLI that automatically generates
+  files (controllers, models, migrations, events, listeners, middleware and more)
+  with a single command, saving development time and enforcing a clean structure.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
+- **Laravel 10** — PHP Framework
+- **JWT Auth** — API Authentication (tymon/jwt-auth)
+- **MySQL** — Database
+- **Eloquent ORM** — Database interaction
+- **Laravel Events & Listeners** — Decoupled application logic
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation Steps
 
-## Learning Laravel
+1. **Clone the project**
+   git clone https://github.com/KharbouchSouhail/Mini-Linkedin-BackendProject-1
+   cd Mini-Linkedin
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Install dependencies**
+   composer install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Create environment file**
+   cp .env.example .env
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. **Configure your database**
+   Open .env and update:
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
 
-## Laravel Sponsors
+5. **Generate Laravel key**
+   php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+6. **Generate JWT secret**
+   php artisan jwt:secret
 
-### Premium Partners
+7. **Run migrations and seeders**
+   php artisan migrate:fresh --seed
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+8. **Start the server**
+   php artisan serve
 
-## Contributing
+## Roles
+| Role      | Permissions                                      |
+|-----------|--------------------------------------------------|
+| candidat  | Create profile, browse offers, apply             |
+| recruteur | Post offers, manage applications, update status  |
+| admin     | Manage users, moderate offers                    |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Testing
+- API base URL: http://127.0.0.1:8000/api
+- Use Postman to test endpoints
+- Default password for all seeded users: password
+- After applying to an offer or updating a status, check:
+  storage/logs/candidatures.log
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-
-modification in readme just to test pushing and PRs
+## Events & Listeners
+This project implements Laravel's Event & Listener system to decouple logic:
+- **CandidatureDeposee** — triggered when a candidate applies to an offer.
+  Logs the candidate name and offer title to storage/logs/candidatures.log
+- **StatutCandidatureMis** — triggered when a recruiter updates an application status.
+  Logs the old status, new status and date to storage/logs/candidatures.log

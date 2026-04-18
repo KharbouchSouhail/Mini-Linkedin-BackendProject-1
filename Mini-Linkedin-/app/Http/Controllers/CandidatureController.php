@@ -5,6 +5,8 @@ use App\Models\Candidature;
 use App\Models\Offre;
 use Illuminate\Http\Request;
 use App\Models\Profil;
+use App\Events\CandidatureDeposee;        
+use App\Events\StatutCandidatureMis;      
 
 class CandidatureController extends Controller
 {
@@ -17,7 +19,6 @@ class CandidatureController extends Controller
         $user   = auth('api')->user();
         $profil = Profil::where('user_id', $user->id)->firstOrFail();
 
-        // Prevent duplicate candidature
         $exists = Candidature::where('offre_id', $offre->id)
             ->where('profil_id', $profil->id)
             ->exists();
@@ -32,6 +33,8 @@ class CandidatureController extends Controller
             'message'   => $request->message,
             'statut'    => 'en_attente'
         ]);
+
+        event(new CandidatureDeposee($candidature));   
 
         return response()->json($candidature, 201);
     }
@@ -61,7 +64,15 @@ class CandidatureController extends Controller
             'statut' => 'required|in:en_attente,acceptee,refusee'
         ]);
 
+        $ancienStatut = $candidature->statut;
+
         $candidature->update(['statut' => $request->statut]);
+
+        event(new StatutCandidatureMis(                 
+            $candidature,
+            $ancienStatut,
+            $request->statut
+        ));
 
         return response()->json($candidature);
     }

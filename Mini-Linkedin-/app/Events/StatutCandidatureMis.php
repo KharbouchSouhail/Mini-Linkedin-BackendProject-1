@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use App\Models\Candidature;
+
+class StatutCandidatureMis
+{
+    use Dispatchable, SerializesModels;
+
+    public Candidature $candidature;
+    public string $ancienStatut;
+    public string $nouveauStatut;
+
+    public function __construct(Candidature $candidature, string $ancienStatut, string $nouveauStatut)
+    {
+        $this->candidature  = $candidature;
+        $this->ancienStatut = $ancienStatut;
+        $this->nouveauStatut = $nouveauStatut;
+    }
+}
